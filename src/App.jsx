@@ -21,7 +21,8 @@ function App() {
         className="registration-btn"
         onClick={() => setShowRegistration(true)}
       >
-        📝 Зарегистрироваться
+        <span>📝</span>
+        <span>Зарегистрироваться</span>
       </button>
 
       <header className="app-header">
