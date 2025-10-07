@@ -711,9 +711,49 @@ body {
       }
     }
 
-    .cases-carousel {
-      width: 100%;
-      padding: 1rem 1rem;
+    /* Стили для мобильной и десктопной навигации */
+    .mobile-navigation {
+      display: block;
+    }
+
+    .desktop-navigation {
+      display: none;
+    }
+
+    /* На компьютерах показываем десктопные вкладки, скрываем бургер-меню */
+    @media (min-width: 769px) {
+      .mobile-navigation {
+        display: none;
+      }
+      
+      .desktop-navigation {
+        display: block;
+      }
+    }
+
+    /* На мобильных скрываем десктопные вкладки, показываем бургер-меню */
+    @media (max-width: 768px) {
+      .mobile-navigation {
+        display: block;
+      }
+      
+      .desktop-navigation {
+        display: none;
+      }
+    }
+
+    /* Дополнительные стили для лучшего отображения */
+    @media (min-width: 769px) {
+      .cases-container {
+        padding-top: 1rem;
+      }
+    }
+
+    /* Обновим стили для бургер-меню чтобы оно не мешало на десктопе */
+    @media (min-width: 769px) {
+      .burger-menu {
+        display: none;
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import CaseCard from "./components/CaseCard";
 import CaseDetails from "./components/CaseDetails";
 import RegistrationModal from "./components/RegistrationModal";
 import BurgerMenu from "./components/BurgerMenu";
+import DesktopTabs from "./components/DesktopTabs";
 import { Carousel } from "antd";
 import { cases } from "./data/cases";
 import "./App.css";
@@ -22,19 +23,23 @@ function App() {
 
   const carouselSettings = {
     dots: true,
-    infinite: true, // было "infinte"
+    infinite: true,
     autoplay: true,
-    arrows: true, // было "arrow"
+    arrows: true,
     autoplaySpeed: 8000,
     speed: 1000,
     slidesToShow: 1,
-    draggable: true, // было "darggable"
+    draggable: true,
     slidesToScroll: 1,
+    // Добавьте эти свойства:
+    adaptiveHeight: true,
+    cssEase: "cubic-bezier(0.645, 0.045, 0.355, 1)",
+    // Уберите responsive или настройте правильно:
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1, // Измените на 1 вместо 2
           slidesToScroll: 1,
         },
       },
@@ -69,12 +74,23 @@ function App() {
       </header>
 
       <main className="cases-container">
-        {/* Вкладки */}
-        <BurgerMenu
-          cases={cases}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-        />
+        {/* Бургер-меню (только на мобильных) */}
+        <div className="mobile-navigation">
+          <BurgerMenu
+            cases={cases}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+        </div>
+
+        {/* Десктопные вкладки (только на компьютере) */}
+        <div className="desktop-navigation">
+          <DesktopTabs
+            cases={cases}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+        </div>
         {/* Контент вкладок */}
         <div className="tab-content">
           {activeTab === "all" ? (

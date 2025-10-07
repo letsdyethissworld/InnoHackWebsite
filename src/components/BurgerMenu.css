@@ -1,6 +1,6 @@
 /* Контейнер меню */
 .burger-menu {
-  position: relative;
+  display: none;
 }
 
 /* Кнопка-бургер */
@@ -121,5 +121,9 @@
   
   .menu-sidebar {
     width: 250px;
+  }
+  
+  .burger-menu {
+    display: block;
   }
 }
