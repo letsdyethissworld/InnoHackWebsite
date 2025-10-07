@@ -68,3 +68,4 @@ typing_extensions==4.15.0
 tzdata==2025.2
 uvicorn==0.37.0
 yarl==1.22.0
+pysqlite3-binary==0.5.3.post1
