@@ -3,7 +3,6 @@ import CaseCard from "./components/CaseCard";
 import CaseDetails from "./components/CaseDetails";
 import RegistrationModal from "./components/RegistrationModal";
 import BurgerMenu from "./components/BurgerMenu";
-import DesktopTabs from "./components/DesktopTabs";
 import { Carousel } from "antd";
 import { cases } from "./data/cases";
 import "./App.css";
@@ -23,23 +22,19 @@ function App() {
 
   const carouselSettings = {
     dots: true,
-    infinite: true,
+    infinite: true, // было "infinte"
     autoplay: true,
-    arrows: true,
-    autoplaySpeed: 8000,
+    arrows: true, // было "arrow"
+    autoplaySpeed: 6000,
     speed: 1000,
     slidesToShow: 1,
-    draggable: true,
+    draggable: false, // было "darggable"
     slidesToScroll: 1,
-    // Добавьте эти свойства:
-    adaptiveHeight: true,
-    cssEase: "cubic-bezier(0.645, 0.045, 0.355, 1)",
-    // Уберите responsive или настройте правильно:
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1, // Измените на 1 вместо 2
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -74,23 +69,12 @@ function App() {
       </header>
 
       <main className="cases-container">
-        {/* Бургер-меню (только на мобильных) */}
-        <div className="mobile-navigation">
-          <BurgerMenu
-            cases={cases}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
-        </div>
-
-        {/* Десктопные вкладки (только на компьютере) */}
-        <div className="desktop-navigation">
-          <DesktopTabs
-            cases={cases}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
-        </div>
+        {/* Вкладки */}
+        <BurgerMenu
+          cases={cases}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
         {/* Контент вкладок */}
         <div className="tab-content">
           {activeTab === "all" ? (
@@ -100,7 +84,7 @@ function App() {
                 Нажмите на карточку кейса для просмотра детальной информации
               </p>
               <div className="cases-carousel">
-                <Carousel {...carouselSettings}>
+                <Carousel {...carouselSettings} className="carousel-container">
                   {cases.map((caseItem) => (
                     <div key={caseItem.id} className="carousel-slide">
                       <CaseCard

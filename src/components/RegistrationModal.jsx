@@ -31,8 +31,8 @@ const RegistrationModal = ({ cases, onClose }) => {
 
   // РЕАЛЬНЫЙ HTTP ЗАПРОС
   const submitRegistration = async (registrationData) => {
-    // ЗАМЕНИТЕ ЭТОТ URL НА АДРЕС ВАШЕГО БЭКЕНДА
-    const API_URL = "https://your-backend-api.com/api/registrations";
+    // Используйте localhost для разработки
+    const API_URL = "http://localhost:8000/api/registrations";
 
     try {
       const response = await fetch(API_URL, {
@@ -51,7 +51,10 @@ const RegistrationModal = ({ cases, onClose }) => {
       return { success: true, data: result };
     } catch (error) {
       console.error("Ошибка при отправке данных:", error);
-      return { success: false, error: error.message };
+      return {
+        success: false,
+        error: error.message || "Не удалось подключиться к серверу",
+      };
     }
   };
 

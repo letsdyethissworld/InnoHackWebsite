@@ -15,9 +15,12 @@
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   --border-radius: 12px;
   --transition: all 0.3s ease;
+  --bg-grey: #f6f6f6;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
@@ -25,9 +28,8 @@ html, body, #root {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -78,7 +80,7 @@ body {
   width: 100%;
 }
 
-.app-header h1 {
+h1 {
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
@@ -86,7 +88,7 @@ body {
   border-radius: 10px;
 }
 
-.app-header h1:hover {
+h1:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
 }
@@ -153,7 +155,7 @@ body {
 
 /* Контент вкладок */
 .tab-content {
-  background: var(--bg-white);
+  background: var(--bg-grey);
   border-radius: var(--border-radius);
   padding: 2rem;
   box-shadow: var(--shadow);
@@ -208,7 +210,6 @@ body {
   background: var(--bg-white);
   border-radius: var(--border-radius);
   padding: 1.5rem;
-  box-shadow: var(--shadow);
   transition: var(--transition);
   display: flex;
   flex-direction: column;
@@ -219,11 +220,6 @@ body {
   flex-shrink: 0;
   cursor: pointer;
   max-width: 100%;
-}
-
-.case-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .case-card .case-header {
@@ -306,7 +302,8 @@ body {
   border-top: 1px solid #f0f0f0;
 }
 
-.time-info, .team-info {
+.time-info,
+.team-info {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -456,7 +453,7 @@ body {
 }
 
 .detail-section li:before {
-  content: "▸";
+  content: '▸';
   color: var(--primary-color);
   font-weight: bold;
   position: absolute;
@@ -493,20 +490,23 @@ body {
   width: 100%;
 }
 
-.time-estimate, .team-size {
+.time-estimate,
+.team-size {
   text-align: center;
   padding: 1.5rem;
   background: #f8f9fa;
   border-radius: var(--border-radius);
 }
 
-.time-estimate h3, .team-size h3 {
+.time-estimate h3,
+.team-size h3 {
   color: var(--text-dark);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
-.time-estimate p, .team-size p {
+.time-estimate p,
+.team-size p {
   color: var(--primary-color);
   font-size: 1.2rem;
   font-weight: bold;
@@ -532,7 +532,7 @@ body {
   .cases-row {
     gap: 1.5rem;
   }
-  
+
   .case-card {
     min-width: 320px;
   }
@@ -552,11 +552,11 @@ body {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  
+
   .cases-row {
     gap: 1rem;
   }
-  
+
   .case-card {
     min-width: 280px;
     padding: 1.25rem;
@@ -565,6 +565,35 @@ body {
   .tab-content {
     padding: 1.5rem;
   }
+}
+
+.carousel-container .slick-dots {
+  bottom: -1rem;
+}
+
+.slick-prev,
+.slick-next {
+  opacity: 0 !important;
+}
+
+.carousel-container:hover {
+  .slick-prev,
+  .slick-next {
+    opacity: 1 !important;
+  }
+
+  .slick-prev::after,
+  .slick-next::after {
+    color: var(--primary-color) !important;
+  }
+}
+
+.carousel-container .slick-dots li button {
+  opacity: 0.7 !important;
+}
+
+.carousel-container .slick-dots .slick-active::after {
+  background-color: var(--primary-color) !important;
 }
 
 @media (max-width: 480px) {
@@ -581,16 +610,16 @@ body {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .case-card {
     min-width: 260px;
     padding: 1rem;
   }
-  
+
   .tab-content {
     padding: 1rem;
   }
-  
+
   .details-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
@@ -614,7 +643,7 @@ body {
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
-    
+
     .detail-section {
       padding: 1.25rem;
     }
@@ -624,15 +653,15 @@ body {
     .details-grid {
       gap: 1rem;
     }
-    
+
     .detail-section {
       padding: 1rem;
     }
-    
+
     .case-details h1 {
       font-size: 2rem;
     }
-    
+
     .case-meta {
       flex-direction: column;
       align-items: center;
@@ -683,9 +712,15 @@ body {
 
     /* Анимация при нажатии */
     @keyframes cardClick {
-      0% { transform: scale(1); }
-      50% { transform: scale(0.98); }
-      100% { transform: scale(1); }
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.98);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
 
     .case-card:active {
@@ -698,7 +733,7 @@ body {
         min-width: 280px;
         padding: 1.25rem;
       }
-      
+
       .click-hint {
         display: none;
       }
@@ -711,49 +746,9 @@ body {
       }
     }
 
-    /* Стили для мобильной и десктопной навигации */
-    .mobile-navigation {
-      display: block;
-    }
-
-    .desktop-navigation {
-      display: none;
-    }
-
-    /* На компьютерах показываем десктопные вкладки, скрываем бургер-меню */
-    @media (min-width: 769px) {
-      .mobile-navigation {
-        display: none;
-      }
-      
-      .desktop-navigation {
-        display: block;
-      }
-    }
-
-    /* На мобильных скрываем десктопные вкладки, показываем бургер-меню */
-    @media (max-width: 768px) {
-      .mobile-navigation {
-        display: block;
-      }
-      
-      .desktop-navigation {
-        display: none;
-      }
-    }
-
-    /* Дополнительные стили для лучшего отображения */
-    @media (min-width: 769px) {
-      .cases-container {
-        padding-top: 1rem;
-      }
-    }
-
-    /* Обновим стили для бургер-меню чтобы оно не мешало на десктопе */
-    @media (min-width: 769px) {
-      .burger-menu {
-        display: none;
-      }
+    .cases-carousel {
+      width: 100%;
+      padding: 1rem 1rem;
     }
   }
 }
