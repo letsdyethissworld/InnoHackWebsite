@@ -26,8 +26,12 @@
     "vite": "^7.1.7"
   },
   "scripts": {
-    "dev": "vite", // Скрипт для локальной разработки
-    "build": "vite build", // Скрипт для сборки проекта
-    "start": "serve -s dist" // Новый скрипт для запуска на продакшн-сервере
+    "dev": "vite", 
+    "build": "vite build",
+    "start": "serve -s dist"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   }
 }
