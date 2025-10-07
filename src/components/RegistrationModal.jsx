@@ -32,7 +32,7 @@ const RegistrationModal = ({ cases, onClose }) => {
   // РЕАЛЬНЫЙ HTTP ЗАПРОС
   const submitRegistration = async (registrationData) => {
     // Используйте localhost для разработки
-    const API_URL = "http://localhost:8000/api/registrations";
+    const API_URL = "https://innohackwebsite-production.up.railway.app/api/registrations";
 
     try {
       const response = await fetch(API_URL, {
