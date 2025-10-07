@@ -10,6 +10,9 @@ import uvicorn
 from sqlalchemy import Column, Integer, String, Text, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 import os
+import pysqlite3
+import sys
+sys.modules['sqlite3'] = pysqlite3
 port = int(os.environ.get("PORT", 8000))
 
 BOT_TOKEN = "8350542451:AAG_fJx9JzJOnLjJxcFGR4JWd_w1k6mBT2s"
