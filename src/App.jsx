@@ -3,6 +3,7 @@ import CaseCard from "./components/CaseCard";
 import CaseDetails from "./components/CaseDetails";
 import RegistrationModal from "./components/RegistrationModal";
 import BurgerMenu from "./components/BurgerMenu";
+import { Carousel } from "antd";
 import { cases } from "./data/cases";
 import "./App.css";
 
@@ -13,6 +14,38 @@ function App() {
   // Функция для перехода к конкретному кейсу
   const handleCaseClick = (caseId) => {
     setActiveTab(caseId);
+  };
+
+  const handleLogoClick = () => {
+    setActiveTab("all");
+  };
+
+  const carouselSettings = {
+    dots: true,
+    infinite: true, // было "infinte"
+    autoplay: true,
+    arrows: true, // было "arrow"
+    autoplaySpeed: 8000,
+    speed: 1000,
+    slidesToShow: 1,
+    draggable: true, // было "darggable"
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -26,7 +59,9 @@ function App() {
       </button>
 
       <header className="app-header">
-        <h1>🎯 Кейсы Лицейского Хакатона</h1>
+        <div className="logo" onClick={handleLogoClick}>
+          <h1>Кейсы InnoHackathon</h1>
+        </div>
         <p>
           Изучите предложенные кейсы и выберите наиболее интересный для
           реализации
@@ -40,7 +75,6 @@ function App() {
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />
-
         {/* Контент вкладок */}
         <div className="tab-content">
           {activeTab === "all" ? (
@@ -49,14 +83,17 @@ function App() {
               <p className="subtitle">
                 Нажмите на карточку кейса для просмотра детальной информации
               </p>
-              <div className="cases-row">
-                {cases.map((caseItem) => (
-                  <CaseCard
-                    key={caseItem.id}
-                    caseItem={caseItem}
-                    onClick={() => handleCaseClick(caseItem.id)}
-                  />
-                ))}
+              <div className="cases-carousel">
+                <Carousel {...carouselSettings}>
+                  {cases.map((caseItem) => (
+                    <div key={caseItem.id} className="carousel-slide">
+                      <CaseCard
+                        caseItem={caseItem}
+                        onClick={() => handleCaseClick(caseItem.id)}
+                      />
+                    </div>
+                  ))}
+                </Carousel>
               </div>
             </div>
           ) : (

@@ -72,16 +72,23 @@ body {
 /* Шапка */
 .app-header {
   padding: 0.5rem 2rem;
+  padding-top: 1.5rem;
   color: var(--text-white);
   text-align: center;
   width: 100%;
 }
 
 .app-header h1 {
-  padding-top: 1.5rem;
-  font-size: clamp(2rem, 5vw, 3rem);
-  margin-bottom: 1rem;
-  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.app-header h1:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
 }
 
 .app-header p {
@@ -702,6 +709,11 @@ body {
         min-width: 260px;
         padding: 1rem;
       }
+    }
+
+    .cases-carousel {
+      width: 100%;
+      padding: 1rem 1rem;
     }
   }
 }
