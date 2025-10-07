@@ -29,9 +29,5 @@
     "dev": "vite", 
     "build": "vite build",
     "start": "serve -s dist"
-  },
-  "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
   }
 }
