@@ -9,6 +9,8 @@ from typing import List
 import uvicorn
 from sqlalchemy import Column, Integer, String, Text, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+import os
+port = int(os.environ.get("PORT", 8000))
 
 BOT_TOKEN = "8350542451:AAG_fJx9JzJOnLjJxcFGR4JWd_w1k6mBT2s"
 ADMINS = [907136578]
@@ -122,4 +124,4 @@ async def root():
     return {"message": "Hackathon Registration API is running"}
 
 if __name__ == "__main__":
-    uvicorn.run("back:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("back:app", host="0.0.0.0", port=port, reload=True)
