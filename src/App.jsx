@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CaseCard from "./components/CaseCard";
 import CaseDetails from "./components/CaseDetails";
 import RegistrationModal from "./components/RegistrationModal";
+import BurgerMenu from "./components/BurgerMenu";
 import { cases } from "./data/cases";
 import "./App.css";
 
@@ -21,8 +22,7 @@ function App() {
         className="registration-btn"
         onClick={() => setShowRegistration(true)}
       >
-        <span>📝</span>
-        <span>Зарегистрироваться</span>
+        📝 Зарегистрироваться
       </button>
 
       <header className="app-header">
@@ -35,27 +35,11 @@ function App() {
 
       <main className="cases-container">
         {/* Вкладки */}
-        <div className="tabs-container">
-          <div className="tabs">
-            <button
-              className={`tab-btn ${activeTab === "all" ? "active" : ""}`}
-              onClick={() => setActiveTab("all")}
-            >
-              Все кейсы
-            </button>
-            {cases.map((caseItem) => (
-              <button
-                key={caseItem.id}
-                className={`tab-btn ${
-                  activeTab === caseItem.id ? "active" : ""
-                }`}
-                onClick={() => setActiveTab(caseItem.id)}
-              >
-                Кейс {caseItem.id}
-              </button>
-            ))}
-          </div>
-        </div>
+        <BurgerMenu
+          cases={cases}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
 
         {/* Контент вкладок */}
         <div className="tab-content">

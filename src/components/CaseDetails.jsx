@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 
 const CaseDetails = ({ caseItem }) => {
   if (!caseItem) {
@@ -13,9 +14,6 @@ const CaseDetails = ({ caseItem }) => {
           <h1>{caseItem.title}</h1>
           <div className="case-meta">
             <span className="category">{caseItem.category}</span>
-            <span className={`difficulty ${caseItem.difficulty.toLowerCase()}`}>
-              {caseItem.difficulty}
-            </span>
           </div>
         </div>
       </div>
@@ -89,11 +87,6 @@ const CaseDetails = ({ caseItem }) => {
         </div>
 
         <div className="case-footer">
-          <div className="time-estimate">
-            <h3>⏱ Ориентировочное время выполнения</h3>
-            <p>{caseItem.timeEstimate}</p>
-          </div>
-
           <div className="team-size">
             <h3>👥 Рекомендуемый размер команды</h3>
             <p>{caseItem.teamSize}</p>

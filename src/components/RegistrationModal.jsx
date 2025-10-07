@@ -4,7 +4,7 @@ import "./RegistrationModal.css";
 const RegistrationModal = ({ cases, onClose }) => {
   const [selectedCase, setSelectedCase] = useState("");
   const [captainName, setCaptainName] = useState("");
-  const [teamMembers, setTeamMembers] = useState([""]);
+  const [teamMembers, setTeamMembers] = useState([]);
   const [teamName, setTeamName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -18,10 +18,9 @@ const RegistrationModal = ({ cases, onClose }) => {
   };
 
   const removeTeamMember = (index) => {
-    if (teamMembers.length > 1) {
-      const newMembers = teamMembers.filter((_, i) => i !== index);
-      setTeamMembers(newMembers);
-    }
+    // Удаляем участника без проверки на минимальное количество
+    const newMembers = teamMembers.filter((_, i) => i !== index);
+    setTeamMembers(newMembers);
   };
 
   const updateTeamMember = (index, value) => {
@@ -132,7 +131,7 @@ const RegistrationModal = ({ cases, onClose }) => {
             <h3>👥 Информация о команде</h3>
             <div className="form-group">
               <label htmlFor="teamName">
-                Название команды *<span className="required-star">*</span>
+                Название команды<span className="required-star">*</span>
               </label>
               <input
                 type="text"
@@ -148,7 +147,7 @@ const RegistrationModal = ({ cases, onClose }) => {
 
             <div className="form-group">
               <label htmlFor="caseSelect">
-                Выберите кейс *<span className="required-star">*</span>
+                Выберите кейс<span className="required-star">*</span>
               </label>
               <select
                 id="caseSelect"
@@ -191,7 +190,7 @@ const RegistrationModal = ({ cases, onClose }) => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="captainName">
-                  Имя капитана *<span className="required-star">*</span>
+                  Имя капитана<span className="required-star">*</span>
                 </label>
                 <input
                   type="text"
@@ -207,7 +206,7 @@ const RegistrationModal = ({ cases, onClose }) => {
 
               <div className="form-group">
                 <label htmlFor="email">
-                  Email *<span className="required-star">*</span>
+                  Email<span className="required-star">*</span>
                 </label>
                 <input
                   type="email"
@@ -244,20 +243,28 @@ const RegistrationModal = ({ cases, onClose }) => {
                     className="form-input"
                     disabled={isLoading}
                   />
-                  {teamMembers.length > 1 && (
-                    <button
-                      type="button"
-                      className="remove-member-btn"
-                      onClick={() => removeTeamMember(index)}
-                      title="Удалить участника"
-                      disabled={isLoading}
-                    >
-                      ✕
-                    </button>
-                  )}
+                  {/* Всегда показываем кнопку удаления */}
+                  <button
+                    type="button"
+                    className="remove-member-btn"
+                    onClick={() => removeTeamMember(index)}
+                    title="Удалить участника"
+                    disabled={isLoading}
+                  >
+                    ✕
+                  </button>
                 </div>
               ))}
             </div>
+
+            {teamMembers.length === 0 && (
+              <div className="no-members-message">
+                <p>
+                  Участники не добавлены. Нажмите «Добавить участника», чтобы
+                  включить кого-то в команду.
+                </p>
+              </div>
+            )}
 
             {teamMembers.length < MAX_TEAM_MEMBERS && (
               <button

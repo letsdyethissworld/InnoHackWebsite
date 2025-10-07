@@ -1,13 +1,10 @@
 import React from "react";
 
-const CaseCard = ({ caseItem }) => {
+const CaseCard = ({ caseItem, onClick }) => {
   return (
-    <div className="case-card">
+    <div className="case-card" onClick={onClick}>
       <div className="case-header">
         <span className="case-number">Кейс {caseItem.id}</span>
-        <span className={`difficulty ${caseItem.difficulty.toLowerCase()}`}>
-          {caseItem.difficulty}
-        </span>
       </div>
 
       <h3>{caseItem.title}</h3>
@@ -32,13 +29,13 @@ const CaseCard = ({ caseItem }) => {
       </div>
 
       <div className="card-footer">
-        <div className="time-info">
-          <span>⏱ {caseItem.timeEstimate.split(" ")[0]}</span>
-        </div>
         <div className="team-info">
           <span>👥 {caseItem.teamSize}</span>
         </div>
       </div>
+
+      {/* Подсказка что карточка кликабельна */}
+      <div className="click-hint">Нажмите для подробностей →</div>
     </div>
   );
 };

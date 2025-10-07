@@ -21,6 +21,7 @@ html, body, #root {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -40,53 +41,44 @@ body {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   width: 100%;
   position: relative;
-  overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
 }
 
-/* Кнопка регистрации в правом верхнем углу - БЕЛАЯ */
+/* Кнопка регистрации в правом верхнем углу */
 .registration-btn {
   position: fixed;
   top: 2rem;
   right: 2rem;
   background: rgba(255, 255, 255, 0.95);
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   z-index: 100;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap; /* Предотвращаем перенос текста */
 }
 
 .registration-btn:hover {
-  background: #667eea;
+  background: var(--primary-color);
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
-.registration-btn:active {
-  transform: translateY(0);
-}
-
 /* Шапка */
 .app-header {
-  padding: 3rem 2rem;
+  padding: 0.5rem 2rem;
   color: var(--text-white);
   text-align: center;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .app-header h1 {
+  padding-top: 1.5rem;
   font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 1rem;
   font-weight: 700;
@@ -101,13 +93,11 @@ body {
 /* Основной контент */
 .cases-container {
   flex: 1;
-  padding: 2rem;
+  padding-bottom: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
-  overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
 }
 
 /* Контейнер вкладок */
@@ -119,7 +109,6 @@ body {
   padding: 1rem;
   width: 100%;
   max-width: 1200px;
-  box-sizing: border-box;
 }
 
 .tabs {
@@ -140,7 +129,6 @@ body {
   font-size: 1rem;
   font-weight: 500;
   white-space: nowrap;
-  box-sizing: border-box;
 }
 
 .tab-btn:hover {
@@ -164,8 +152,6 @@ body {
   box-shadow: var(--shadow);
   width: 100%;
   max-width: 1200px;
-  box-sizing: border-box;
-  overflow: hidden; /* Предотвращаем выпадание контента */
 }
 
 .all-cases h2 {
@@ -187,11 +173,9 @@ body {
   display: flex;
   gap: 2rem;
   overflow-x: auto;
-  padding: 1rem 0;
+  padding: 1rem 1rem;
   scrollbar-width: thin;
   scrollbar-color: var(--primary-color) transparent;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .cases-row::-webkit-scrollbar {
@@ -227,7 +211,7 @@ body {
   min-width: 350px;
   flex-shrink: 0;
   cursor: pointer;
-  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .case-card:hover {
@@ -325,7 +309,7 @@ body {
 
 .click-hint {
   position: absolute;
-  bottom: 1rem;
+  bottom: 1.4rem;
   right: 1rem;
   color: var(--primary-color);
   font-size: 0.8rem;
@@ -338,10 +322,12 @@ body {
   opacity: 1;
 }
 
+/* Остальные стили остаются такими же как в предыдущем ответе */
+/* (CaseDetails стили, адаптивность и т.д.) */
+
 /* Детальное представление кейса */
 .case-details {
   width: 100%;
-  box-sizing: border-box;
 }
 
 .case-details .case-header {
@@ -349,7 +335,6 @@ body {
   margin-bottom: 3rem;
   padding-bottom: 2rem;
   border-bottom: 2px solid #f0f0f0;
-  box-sizing: border-box;
 }
 
 .case-title-section .case-number {
@@ -412,7 +397,6 @@ body {
   padding: 2rem;
   background: #f8f9fa;
   border-radius: var(--border-radius);
-  box-sizing: border-box;
 }
 
 .main-description h2 {
@@ -433,7 +417,6 @@ body {
   gap: 2rem;
   margin-bottom: 3rem;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .detail-section {
@@ -441,7 +424,6 @@ body {
   padding: 1.5rem;
   border-radius: var(--border-radius);
   border: 1px solid #f0f0f0;
-  box-sizing: border-box;
 }
 
 .detail-section h3 {
@@ -502,7 +484,6 @@ body {
   padding-top: 2rem;
   border-top: 2px solid #f0f0f0;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .time-estimate, .team-size {
@@ -510,7 +491,6 @@ body {
   padding: 1.5rem;
   background: #f8f9fa;
   border-radius: var(--border-radius);
-  box-sizing: border-box;
 }
 
 .time-estimate h3, .team-size h3 {
@@ -528,184 +508,71 @@ body {
 /* Подвал */
 .app-footer {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 0.5rem 2rem;
   color: var(--text-white);
   opacity: 0.8;
   margin-top: auto;
   width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  box-sizing: border-box;
 }
 
 .app-footer p {
   font-size: 1.1rem;
 }
 
-/* Адаптивность для больших экранов */
-@media (min-width: 1400px) {
-  .app-header,
-  .cases-container,
-  .app-footer {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-  
-  .details-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1600px) {
-  .app-header,
-  .cases-container,
-  .app-footer {
-    padding-left: 6rem;
-    padding-right: 6rem;
-  }
-  
-  .tabs-container,
-  .tab-content {
-    max-width: 1400px;
-  }
-}
-
-/* Адаптивность для планшетов */
-@media (max-width: 1024px) {
-  .app-header,
-  .cases-container,
-  .app-footer {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  
-  .cases-grid {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+/* Адаптивность */
+@media (max-width: 1200px) {
+  .cases-row {
     gap: 1.5rem;
   }
   
-  .details-grid {
-    grid-template-columns: 1fr;
+  .case-card {
+    min-width: 320px;
   }
 }
 
-/* Адаптивность для мобильных устройств - ИСПРАВЛЕННЫЕ СТИЛИ */
 @media (max-width: 768px) {
+  .registration-btn {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
   .app-header,
   .cases-container,
   .app-footer {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .app-header {
-    padding: 2rem 1rem;
-  }
-  
-  .cases-container {
-    padding: 1rem;
-  }
-  
-  .tab-content {
-    padding: 1.5rem;
-    border-radius: 0; /* Убираем скругления на мобильных */
-    margin: 0 -1rem; /* Расширяем на всю ширину */
-    width: calc(100% + 2rem); /* Компенсируем отступы */
-    max-width: none; /* Убираем ограничение максимальной ширины */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   
   .cases-row {
     gap: 1rem;
-    padding: 0.5rem 0;
-    margin: 0 -1rem; /* Расширяем область прокрутки */
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
   
   .case-card {
     min-width: 280px;
     padding: 1.25rem;
-    margin: 0;
   }
-  
-  .tabs {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .tab-btn {
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
-  }
-  
-  .case-details h1 {
-    font-size: 2rem;
-  }
-  
-  .case-meta {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .details-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .detail-section {
-    padding: 1rem;
-    margin: 0;
-  }
-  
-  .main-description {
-    padding: 1rem;
-    margin: 0 -1rem 2rem;
-    border-radius: 0;
-    width: calc(100% + 2rem);
-  }
-  
-  /* ИСПРАВЛЕНИЕ ДЛЯ КНОПКИ РЕГИСТРАЦИИ - ТОЛЬКО 1 ЭМОДЗИ */
-  .registration-btn {
-    top: 1rem;
-    right: 1rem;
-    padding: 0.6rem 1rem;
-    font-size: 0;
-    width: auto;
-    min-width: auto;
-  }
-  
-  .registration-btn::before {
-    content: "📝";
-    font-size: 1rem;
-    display: block;
-  }
-  
-  .registration-btn span {
-    display: none;
+
+  .tab-content {
+    padding: 1.5rem;
   }
 }
 
-/* Адаптивность для очень маленьких экранов */
 @media (max-width: 480px) {
+  .registration-btn {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
   .app-header,
   .cases-container,
   .app-footer {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-  
-  .app-header {
-    padding: 1.5rem 0.5rem;
-  }
-  
-  .cases-container {
-    padding: 0.5rem;
-  }
-  
-  .tab-content {
-    padding: 1rem;
-    margin: 0 -0.5rem;
-    width: calc(100% + 1rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
   .case-card {
@@ -713,51 +580,128 @@ body {
     padding: 1rem;
   }
   
-  .registration-btn {
-    top: 0.5rem;
-    right: 0.5rem;
-    padding: 0.5rem;
-  }
-  
-  .case-details h1 {
-    font-size: 1.75rem;
-  }
-  
-  .main-description {
+  .tab-content {
     padding: 1rem;
-    margin: 0 -0.5rem 2rem;
-    width: calc(100% + 1rem);
-  }
-  
-  .tech-stack {
-    justify-content: center;
   }
   
   .details-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    width: 100%;
   }
-  
-  .case-footer {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-}
 
-/* Улучшение для касаний на мобильных */
-@media (hover: none) {
-  .case-card:hover {
-    transform: none;
+  .detail-section {
+    background: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #f0f0f0;
+    width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
   }
-  
-  .tab-btn:hover {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: none;
+
+  @media (max-width: 768px) {
+    .details-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .detail-section {
+      padding: 1.25rem;
+    }
   }
-  
-  .tab-btn.active:hover {
-    background: var(--text-white);
-    color: var(--primary-color);
+
+  @media (max-width: 480px) {
+    .details-grid {
+      gap: 1rem;
+    }
+    
+    .detail-section {
+      padding: 1rem;
+    }
+    
+    .case-details h1 {
+      font-size: 2rem;
+    }
+    
+    .case-meta {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Стили для карточек кейсов */
+    .case-card {
+      background: var(--bg-white);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border: 1px solid #f0f0f0;
+      position: relative;
+      min-width: 350px;
+      flex-shrink: 0;
+      cursor: pointer; /* Меняем курсор на указатель */
+    }
+
+    .case-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      border-color: var(--primary-color);
+    }
+
+    .case-card:active {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    /* Подсказка о кликабельности */
+    .click-hint {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .case-card:hover .click-hint {
+      opacity: 1;
+    }
+
+    /* Анимация при нажатии */
+    @keyframes cardClick {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    .case-card:active {
+      animation: cardClick 0.2s ease;
+    }
+
+    /* Адаптивность для мобильных */
+    @media (max-width: 768px) {
+      .case-card {
+        min-width: 280px;
+        padding: 1.25rem;
+      }
+      
+      .click-hint {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .case-card {
+        min-width: 260px;
+        padding: 1rem;
+      }
+    }
   }
 }

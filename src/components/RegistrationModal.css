@@ -517,4 +517,14 @@
     background-color: #f5f5f5;
     cursor: not-allowed;
   }
+
+  .no-members-message {
+  text-align: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 1rem 0;
+  color: #666;
+  font-style: italic;
+}
 }
