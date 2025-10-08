@@ -173,7 +173,7 @@ const RegistrationModal = ({ cases, onClose }) => {
         <div className="modal-header">
           <h2>🎯 Регистрация на хакатон</h2>
           <button className="close-btn" onClick={onClose}>
-            ×
+            ✕
           </button>
         </div>
 
