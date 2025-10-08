@@ -31,33 +31,43 @@ const RegistrationModal = ({ cases, onClose }) => {
 
   // РЕАЛЬНЫЙ HTTP ЗАПРОС
   const submitRegistration = async (registrationData) => {
-    // Используйте localhost для разработки
-    const API_URL =
-      "https://innohackwebsite-production.up.railway.app/api/registrations";
+  const API_URL = "https://innohackwebsite-production.up.railway.app/api/registrations";
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(registrationData),
-      });
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: 'cors', // явно указываем режим CORS
+      body: JSON.stringify(registrationData),
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    if (!response.ok) {
+      // Более детальная информация об ошибке
+      const errorText = await response.text();
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    }
 
-      const result = await response.json();
-      return { success: true, data: result };
-    } catch (error) {
-      console.error("Ошибка при отправке данных:", error);
+    const result = await response.json();
+    return { success: true, data: result };
+  } catch (error) {
+    console.error("Ошибка при отправке данных:", error);
+    
+    // Проверяем, является ли ошибка CORS
+    if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
       return {
         success: false,
-        error: error.message || "Не удалось подключиться к серверу",
+        error: "CORS ошибка: Бэкенд не разрешает запросы с этого домена. Нужно настроить CORS на сервере."
       };
     }
-  };
+    
+    return {
+      success: false,
+      error: error.message || "Не удалось подключиться к серверу"
+    };
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
