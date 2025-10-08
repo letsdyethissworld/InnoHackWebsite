@@ -150,14 +150,7 @@
 }
 
 /* Адаптивность для мобильных */
-@media (max-width: 768px) {
-  .burger-button {
-    top: 0.5rem;
-    left: 0.5rem;
-    width: 45px;
-    height: 45px;
-  }
-  
+@media (max-width: 768px) {  
   .menu-sidebar {
     width: 250px;
   }
@@ -174,15 +167,6 @@
 
 /* Для очень маленьких экранов */
 @media (max-width: 480px) {
-  .burger-button {
-    width: 40px;
-    height: 40px;
-  }
-
-  .burger-button span {
-    width: 20px;
-    height: 2px;
-  }
 
   .menu-sidebar {
     width: 220px;
