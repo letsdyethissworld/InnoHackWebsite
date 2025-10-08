@@ -10,7 +10,7 @@ const RegistrationModal = ({ cases, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const MAX_TEAM_MEMBERS = 4;
+  const MAX_TEAM_MEMBERS = 3;
 
   // Фильтруем кейсы - убираем кейс с id 5 (регистрация закрыта)
   const availableCases = cases.filter(caseItem => caseItem.id !== 5);
