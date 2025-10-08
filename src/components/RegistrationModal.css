@@ -20,7 +20,7 @@
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
-  overflow: hidden; /* Изменим на hidden чтобы скроллбар был внутри */
+  overflow: hidden;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
@@ -36,7 +36,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0; /* Чтобы хедер не сжимался */
+  flex-shrink: 0;
 }
 
 .modal-header h2 {
@@ -45,11 +45,12 @@
   font-weight: 700;
 }
 
+/* ИСПРАВЛЕННАЯ КНОПКА ЗАКРЫТИЯ */
 .close-btn {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border: none;
-  border-radius: 50% !important; /* Добавляем !important */
+  border-radius: 50% !important;
   width: 40px;
   height: 40px;
   font-size: 1.5rem;
@@ -59,13 +60,13 @@
   justify-content: center;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  /* Добавляем дополнительные гарантии */
   min-width: 40px !important;
   min-height: 40px !important;
   max-width: 40px !important;
   max-height: 40px !important;
   padding: 0 !important;
   line-height: 1 !important;
+  flex-shrink: 0;
 }
 
 .close-btn:hover {
@@ -78,11 +79,9 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  overflow-y: auto; /* Скролл только для формы */
-  flex: 1; /* Занимает все доступное пространство */
+  overflow-y: auto;
+  flex: 1;
 }
-
-/* Остальные стили формы остаются прежними... */
 
 .form-section {
   background: white;
@@ -153,7 +152,7 @@
   transition: all 0.3s ease;
   background: white;
   font-family: inherit;
-  color: #333; /* ЧЕРНЫЙ ТЕКСТ для читаемости */
+  color: #333;
 }
 
 .form-input:focus,
@@ -168,7 +167,6 @@
   color: #a0a0a0;
 }
 
-/* Исправляем выпадающий список */
 .form-select {
   appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
@@ -179,12 +177,11 @@
 }
 
 .form-select option {
-  color: #333; /* Черный текст для опций */
+  color: #333;
   background: white;
   padding: 0.5rem;
 }
 
-/* Стили для превью кейса */
 .case-preview {
   margin-top: 1rem;
   padding: 1rem;
@@ -239,7 +236,6 @@
   margin: 0;
 }
 
-/* Стили для участников команды */
 .team-members {
   display: flex;
   flex-direction: column;
@@ -327,7 +323,6 @@
   margin-top: 0.5rem;
 }
 
-/* Кнопки действий */
 .form-actions {
   display: flex;
   gap: 1rem;
@@ -335,7 +330,7 @@
   margin-top: 1rem;
   padding-top: 1.5rem;
   border-top: 1px solid #f0f0f0;
-  flex-shrink: 0; /* Чтобы не сжимались */
+  flex-shrink: 0;
 }
 
 .cancel-btn {
@@ -383,7 +378,6 @@
   transform: translateY(0);
 }
 
-/* Анимации */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -399,7 +393,6 @@
   animation: slideIn 0.3s ease-out;
 }
 
-/* ИСПРАВЛЕННЫЙ СКРОЛЛБАР - теперь внутри формы */
 .registration-form::-webkit-scrollbar {
   width: 6px;
 }
@@ -431,6 +424,16 @@
   
   .modal-header {
     padding: 1.5rem;
+  }
+  
+  .close-btn {
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+    max-width: 35px !important;
+    max-height: 35px !important;
+    font-size: 1.3rem;
   }
   
   .registration-form {
@@ -477,6 +480,16 @@
     font-size: 1.25rem;
   }
   
+  .close-btn {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
+    font-size: 1.1rem;
+  }
+  
   .registration-form {
     padding: 1rem;
     gap: 1rem;
@@ -491,41 +504,41 @@
     padding: 0.6rem 0.8rem;
     font-size: 0.9rem;
   }
+}
 
-  /* Добавьте в конец RegistrationModal.css */
-  .loading-spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid transparent;
-    border-top: 2px solid white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-  .submit-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none !important;
-  }
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
 
-  .remove-member-btn:disabled,
-  .add-member-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+.remove-member-btn:disabled,
+.add-member-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-  .form-input:disabled,
-  .form-select:disabled {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
-  }
+.form-input:disabled,
+.form-select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
 
-  .no-members-message {
+.no-members-message {
   text-align: center;
   padding: 1rem;
   background: #f8f9fa;
@@ -533,5 +546,4 @@
   margin: 1rem 0;
   color: #666;
   font-style: italic;
-}
 }
