@@ -684,12 +684,6 @@ body {
       cursor: pointer; /* Меняем курсор на указатель */
     }
 
-    .case-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      border-color: var(--primary-color);
-    }
-
     .case-card:active {
       transform: translateY(-4px) scale(1.01);
     }
