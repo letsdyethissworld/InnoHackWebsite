@@ -8,6 +8,18 @@ const CaseDetails = ({ caseItem }) => {
 
   return (
     <div className="case-details">
+      {caseItem.id === 1 && (
+        <div className="registration-closed-banner">
+          <div className="banner-content">
+            <span className="banner-icon">🚫</span>
+            <div className="banner-text">
+              <h3>Регистрация закрыта</h3>
+              <p>Достигнуто максимальное количество команд для этого кейса</p>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="case-header">
         <div className="case-title-section">
           <span className="case-number">Кейс {caseItem.id}</span>
