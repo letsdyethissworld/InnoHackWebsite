@@ -518,7 +518,7 @@
     cursor: not-allowed;
   }
 
-  .no-members-message {
+  .no-members-message p {
     text-align: center;
     padding: 1rem;
     background: #f8f9fa;
