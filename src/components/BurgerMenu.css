@@ -51,7 +51,7 @@
 }
 
 .burger-button.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(6px, 6px);
 }
 
 /* Затемнение фона */
@@ -122,17 +122,17 @@
 }
 
 /* Улучшаем видимость разделов */
-.menu-item:nth-child(2) { /* Расписание */
+.menu-item:nth-child(1) { /* Расписание */
   background: rgba(255, 193, 7, 0.1);
   border: 1px solid rgba(255, 193, 7, 0.2);
 }
 
-.menu-item:nth-child(2):hover {
+.menu-item:nth-child(1):hover {
   background: rgba(255, 193, 7, 0.2);
   border-color: rgba(255, 193, 7, 0.4);
 }
 
-.menu-item:nth-child(2).active {
+.menu-item:nth-child(1).active {
   background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
   color: white;
 }
