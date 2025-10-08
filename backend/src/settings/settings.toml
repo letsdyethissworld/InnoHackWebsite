@@ -1,0 +1,28 @@
+[default.api]
+application_name = "Backend"
+description="Backend"
+session_jwt_secret = "Not secure" # Real one must be in secrets
+session_token_expiration_time = 2592000  # 30 days
+trusted_hosts = []
+
+[default.server]
+host = "0.0.0.0"
+port = 8080
+lifespan = "on"
+proxy_headers = true
+forwarded_allow_ips = "*"
+timeout_keep_alive = 300  # 5 minutes for streaming connections
+reload = false
+workers = 1
+access_log = true
+
+[default.run_settings]
+local = false
+logging_level = "DEBUG"
+static_files_dir = "/home/app/static"
+
+[default.telegram]
+bot_token = "8350542451:AAG_fJx9JzJOnLjJxcFGR4JWd_w1k6mBT2s"
+admin_user_ids = [907136578]
+enabled = true
+

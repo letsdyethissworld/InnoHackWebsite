@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_PASSWORD: docker
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=2000
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  migrations:
+    image: amacneil/dbmate:latest
+    command: -d db/migrations up
+    environment:
+      DATABASE_URL: postgres://postgres:docker@postgres:5432/postgres?sslmode=disable
+    volumes:
+      - ./db/migrations:/db/migrations
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ENVIRONMENT: dev
+    environment:
+      - ENV=dev
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - ./src:/home/app/src:delegated
+    ports:
+      - "8080:8080"

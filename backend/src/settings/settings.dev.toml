@@ -1,0 +1,25 @@
+[dev]
+dynaconf_merge = true # Required for merging secrets with this file into one config
+
+[dev.database]
+host = "postgres"
+port = 5432
+user = "postgres"
+password = "docker"
+name = "postgres"
+
+[dev.api]
+trusted_hosts = ["localhost"]
+session_jwt_secret = "CantB3Trust3d"
+
+[dev.server]
+reload = true  # Enable auto-reload for development
+workers = 1  # Single worker for development
+
+[dev.run_settings]
+local = true
+application_url = "http://localhost:3000"
+backend_url = "http://localhost:8080" # used only dev env.
+
+
+

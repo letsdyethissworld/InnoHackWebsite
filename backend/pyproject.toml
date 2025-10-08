@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "hackathon-backend"
+version = "0.1.0"
+description = "Backend for InnoHack hackathon registration system"
+authors = ["InnoHack Team <team@innohack.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.118.0"
+uvicorn = {extras = ["standard"], version = "^0.37.0"}
+sqlalchemy = "^2.0.43"
+aiogram = "^3.22.0"
+pydantic = "^2.11.10"
+python-multipart = "^0.0.9"
+pysqlite3-binary = "^0.5.0"
+pydantic-settings = "^2.0.0"
+dynaconf = "^3.2.11"
+sqlmodel = "^0.0.25"
+asyncpg = "^0.30.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-asyncio = "^0.24.0"
+black = "^24.0.0"
+isort = "^5.13.0"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "hackathon_backend.main:main"

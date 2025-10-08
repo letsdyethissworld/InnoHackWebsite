@@ -1,0 +1,20 @@
+[staging]
+dynaconf_merge = true # Required for merging secrets with this file into one config
+
+[staging.database]
+host = "postgres"
+port = 5432
+user = "postgres"
+password = "docker"
+name = "postgres"
+
+[staging.api]
+trusted_hosts = ["frontend.url"]
+session_jwt_secret = "CantB3Trust3d2"
+
+[staging.server]
+workers = 1
+
+[staging.run_settings]
+application_url = "http://frontend.url"
+
