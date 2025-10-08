@@ -12,22 +12,6 @@ const CaseCard = ({ caseItem, onClick }) => {
 
       <p className="short-description">{caseItem.shortDescription}</p>
 
-      <div className="tech-preview">
-        <strong>Технологии:</strong>
-        <div className="tech-tags">
-          {caseItem.technologies.slice(0, 3).map((tech) => (
-            <span key={tech} className="tech-tag">
-              {tech}
-            </span>
-          ))}
-          {caseItem.technologies.length > 3 && (
-            <span className="tech-tag-more">
-              +{caseItem.technologies.length - 3} еще
-            </span>
-          )}
-        </div>
-      </div>
-
       <div className="card-footer">
         <div className="team-info">
           <span>👥 {caseItem.teamSize}</span>
