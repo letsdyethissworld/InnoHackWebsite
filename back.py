@@ -9,6 +9,10 @@ from typing import List
 import uvicorn
 from sqlalchemy import Column, Integer, String, Text, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+# Добавьте в начало файла
+import pysqlite3
+import sys
+sys.modules['sqlite3'] = pysqlite3
 
 BOT_TOKEN = "8350542451:AAG_fJx9JzJOnLjJxcFGR4JWd_w1k6mBT2s"
 ADMINS = [907136578]
