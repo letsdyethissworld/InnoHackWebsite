@@ -3,6 +3,7 @@ import CaseCard from "./components/CaseCard";
 import CaseDetails from "./components/CaseDetails";
 import RegistrationModal from "./components/RegistrationModal";
 import BurgerMenu from "./components/BurgerMenu";
+import DesktopTabs from "./components/DesktopTabs";
 import { Carousel } from "antd";
 import { cases } from "./data/cases";
 import "./App.css";
