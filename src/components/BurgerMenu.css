@@ -21,6 +21,7 @@
   gap: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .burger-button:hover {
@@ -72,7 +73,7 @@
   left: -300px;
   width: 280px;
   height: 100vh;
-  background: white;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   z-index: 1000;
   padding: 5rem 1rem 2rem 1rem;
   box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
@@ -81,6 +82,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border-right: 1px solid #e0e0e0;
 }
 
 .menu-sidebar.open {
@@ -97,17 +99,47 @@
   transition: all 0.2s ease;
   color: #333;
   font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .menu-item:hover {
-  background: #f0f0f0;
+  background: rgba(102, 126, 234, 0.1);
   transform: translateX(5px);
+  border-color: rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
 }
 
 .menu-item.active {
-  background: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   font-weight: 600;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Улучшаем видимость разделов */
+.menu-item:nth-child(2) { /* Расписание */
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.menu-item:nth-child(2):hover {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.4);
+}
+
+.menu-item:nth-child(2).active {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  color: white;
+}
+
+/* Эмодзи для лучшей визуальной идентификации */
+.menu-item::before {
+  font-size: 1.2rem;
 }
 
 /* Адаптивность для мобильных */
@@ -125,5 +157,33 @@
   
   .burger-menu {
     display: block;
+  }
+
+  .menu-item {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .burger-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .burger-button span {
+    width: 20px;
+    height: 2px;
+  }
+
+  .menu-sidebar {
+    width: 220px;
+    padding: 4rem 0.75rem 1.5rem 0.75rem;
+  }
+
+  .menu-item {
+    padding: 0.75rem;
+    font-size: 0.9rem;
   }
 }
