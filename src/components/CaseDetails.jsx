@@ -42,6 +42,7 @@ const CaseDetails = ({ caseItem }) => {
               ))}
             </ul>
           </div>
+        </div>
 
         <div className="case-footer">
           <div className="team-size">
