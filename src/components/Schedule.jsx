@@ -37,7 +37,7 @@ const Schedule = () => {
   return (
     <div className="schedule">
       <div className="schedule-header">
-        <h1>📅 Расписание хакатона</h1>
+        <h1>Расписание хакатона</h1>
         <p className="schedule-subtitle">
           Ознакомьтесь с программой мероприятий на все дни соревнований
         </p>
