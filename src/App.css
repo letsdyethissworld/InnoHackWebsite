@@ -672,7 +672,6 @@ body {
       background: var(--bg-white);
       border-radius: var(--border-radius);
       padding: 1.5rem;
-      box-shadow: var(--shadow);
       transition: var(--transition);
       display: flex;
       flex-direction: column;
