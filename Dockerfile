@@ -4,19 +4,19 @@ FROM node:18-alpine
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json
+# Копируем файлы зависимостей
 COPY package*.json ./
 
 # Устанавливаем зависимости
 RUN npm install
 
-# Копируем исходный код
+# Копируем исходный код проекта (включая vite.config.js)
 COPY . .
 
 # Собираем приложение
 RUN npm run build
 
-# Устанавливаем serve глобально
+# Устанавливаем serve для статики
 RUN npm install -g serve
 
 # Открываем порт
