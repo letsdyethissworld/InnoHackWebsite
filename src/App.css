@@ -771,6 +771,7 @@ body {
     .cases-carousel {
       width: 100%;
       padding: 1rem 1rem;
+      height: 70vh;
     }
 
     .no-members-message {
