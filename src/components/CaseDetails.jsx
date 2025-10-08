@@ -35,17 +35,6 @@ const CaseDetails = ({ caseItem }) => {
           </div>
 
           <div className="detail-section">
-            <h3>🛠 Технологии</h3>
-            <div className="tech-stack">
-              {caseItem.technologies.map((tech) => (
-                <span key={tech} className="tech-tag large">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="detail-section">
             <h3>📋 Основные требования</h3>
             <ul>
               {caseItem.requirements.map((req, index) => (
@@ -53,38 +42,6 @@ const CaseDetails = ({ caseItem }) => {
               ))}
             </ul>
           </div>
-
-          <div className="detail-section">
-            <h3>⭐ Критерии оценки</h3>
-            <ul>
-              {caseItem.criteria.map((criterion, index) => (
-                <li key={index}>
-                  <strong>{criterion.name}:</strong> {criterion.description}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {caseItem.bonus && (
-            <div className="detail-section bonus">
-              <h3>🎁 Бонусные задания</h3>
-              <ul>
-                {caseItem.bonus.map((task, index) => (
-                  <li key={index}>{task}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="detail-section">
-            <h3>💡 Рекомендации</h3>
-            <ul>
-              {caseItem.recommendations.map((tip, index) => (
-                <li key={index}>{tip}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
 
         <div className="case-footer">
           <div className="team-size">
