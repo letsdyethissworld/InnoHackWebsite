@@ -737,6 +737,35 @@ body {
       .click-hint {
         display: none;
       }
+
+      .carousel-container .slick-dots {
+        bottom: -1rem;
+      }
+      
+      .slick-prev,
+      .slick-next {
+        opacity: 0 !important;
+      }
+      
+      .carousel-container:hover {
+        .slick-prev,
+        .slick-next {
+          opacity: 1 !important;
+        }
+      
+        .slick-prev::after,
+        .slick-next::after {
+          color: var(--primary-color) !important;
+        }
+      }
+      
+      .carousel-container .slick-dots li button {
+        opacity: 0.7 !important;
+      }
+      
+      .carousel-container .slick-dots .slick-active::after {
+        background-color: var(--primary-color) !important;
+      }
     }
 
     @media (max-width: 480px) {
