@@ -48,9 +48,11 @@ app = FastAPI(title="Registration Bot API")
 # Добавьте CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://innohack.up.railway.app/"],
+    allow_origins=[
+        "https://innohack.up.railway.app"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
