@@ -73,7 +73,7 @@ export const cases = [
     technologies: ["Python", "aiogram", "PostgreSQL", "Google Maps API", "Docker"],
     
     timeEstimate: "4-5 недель",
-    teamSize: "4-5 человек"
+    teamSize: "3-4 человек"
   },
   {
     id: 3,
@@ -182,6 +182,6 @@ export const cases = [
     technologies: ["React", "Node.js", "MongoDB", "Express", "WebSocket"],
     
     timeEstimate: "4-5 недель",
-    teamSize: "4-5 человек"
+    teamSize: "3-4 человек"
   }
 ];
