@@ -80,7 +80,7 @@ body {
   width: 100%;
 }
 
-.app-header .logo h1 {
+h1 {
   cursor: pointer;
   transition: all 0.3s ease;
   display: inline-block;
@@ -88,7 +88,7 @@ body {
   border-radius: 10px;
 }
 
-.app-header .logo h1:hover {
+h1:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
 }
@@ -177,35 +177,23 @@ body {
   font-size: 1.1rem;
 }
 
-/* СЕТКА КАРТОЧЕК В РЯД (NOWRAP) */
-.cases-row {
+/* Карусель с одинаковой высотой карточек */
+.cases-carousel .slick-track {
+  display: flex !important;
+  align-items: stretch;
+}
+
+.cases-carousel .carousel-slide {
+  height: auto;
+  display: flex !important;
+}
+
+.cases-carousel .carousel-slide > div {
+  width: 100%;
   display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding: 1rem 1rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) transparent;
 }
 
-.cases-row::-webkit-scrollbar {
-  height: 8px;
-}
-
-.cases-row::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
-}
-
-.cases-row::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-}
-
-.cases-row::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
-}
-
-/* Карточка кейса (обновленная для ряда) */
+/* Карточка кейса */
 .case-card {
   background: var(--bg-white);
   border-radius: var(--border-radius);
@@ -220,6 +208,7 @@ body {
   flex-shrink: 0;
   cursor: pointer;
   max-width: 100%;
+  flex: 1;
 }
 
 .case-card .case-header {
@@ -325,9 +314,6 @@ body {
 .case-card:hover .click-hint {
   opacity: 1;
 }
-
-/* Остальные стили остаются такими же как в предыдущем ответе */
-/* (CaseDetails стили, адаптивность и т.д.) */
 
 /* Детальное представление кейса */
 .case-details {
@@ -527,6 +513,36 @@ body {
   font-size: 1.1rem;
 }
 
+/* Стили для карусели */
+.carousel-container .slick-dots {
+  bottom: -1rem;
+}
+
+.slick-prev,
+.slick-next {
+  opacity: 0 !important;
+}
+
+.carousel-container:hover {
+  .slick-prev,
+  .slick-next {
+    opacity: 1 !important;
+  }
+
+  .slick-prev::after,
+  .slick-next::after {
+    color: var(--primary-color) !important;
+  }
+}
+
+.carousel-container .slick-dots li button {
+  opacity: 0.7 !important;
+}
+
+.carousel-container .slick-dots .slick-active::after {
+  background-color: var(--primary-color) !important;
+}
+
 /* Адаптивность */
 @media (max-width: 1200px) {
   .cases-row {
@@ -560,41 +576,25 @@ body {
   .case-card {
     min-width: 280px;
     padding: 1.25rem;
-    height: 50vh;
+    height: 100%;
   }
 
   .tab-content {
     padding: 1.5rem;
   }
-}
 
-.carousel-container .slick-dots {
-  bottom: -1rem;
-}
-
-.slick-prev,
-.slick-next {
-  opacity: 0 !important;
-}
-
-.carousel-container:hover {
-  .slick-prev,
-  .slick-next {
-    opacity: 1 !important;
+  /* Для мобильных - делаем все карточки одинаковой высоты */
+  .cases-carousel .slick-slide {
+    height: auto;
   }
 
-  .slick-prev::after,
-  .slick-next::after {
-    color: var(--primary-color) !important;
+  .cases-carousel .slick-slide > div {
+    height: 100%;
   }
-}
 
-.carousel-container .slick-dots li button {
-  opacity: 0.7 !important;
-}
-
-.carousel-container .slick-dots .slick-active::after {
-  background-color: var(--primary-color) !important;
+  .click-hint {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -639,150 +639,43 @@ body {
     word-wrap: break-word;
   }
 
-  @media (max-width: 768px) {
-    .details-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .detail-section {
-      padding: 1.25rem;
-    }
+  /* Фиксированная минимальная высота для очень маленьких экранов */
+  .cases-carousel .carousel-slide {
+    min-height: 400px;
   }
 
-  @media (max-width: 480px) {
-    .details-grid {
-      gap: 1rem;
-    }
+  .case-details h1 {
+    font-size: 2rem;
+  }
 
-    .detail-section {
-      padding: 1rem;
-    }
+  .case-meta {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
-    .case-details h1 {
-      font-size: 2rem;
-    }
+@media (max-width: 768px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
-    .case-meta {
-      flex-direction: column;
-      align-items: center;
-    }
+  .detail-section {
+    padding: 1.25rem;
+  }
+}
 
-    /* Стили для карточек кейсов */
-    .case-card {
-      background: var(--bg-white);
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border: 1px solid #f0f0f0;
-      position: relative;
-      min-width: 350px;
-      flex-shrink: 0;
-      cursor: pointer; /* Меняем курсор на указатель */
-    }
+@media (max-width: 480px) {
+  .details-grid {
+    gap: 1rem;
+  }
 
-    .case-card:active {
-      transform: translateY(-4px) scale(1.01);
-    }
+  .detail-section {
+    padding: 1rem;
+  }
 
-    /* Подсказка о кликабельности */
-    .click-hint {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      color: var(--primary-color);
-      font-size: 0.8rem;
-      opacity: 0;
-      transition: var(--transition);
-      font-weight: 500;
-    }
-
-    .case-card:hover .click-hint {
-      opacity: 1;
-    }
-
-    /* Анимация при нажатии */
-    @keyframes cardClick {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(0.98);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .case-card:active {
-      animation: cardClick 0.2s ease;
-    }
-
-    /* Адаптивность для мобильных */
-    @media (max-width: 768px) {
-      .case-card {
-        min-width: 280px;
-        padding: 1.25rem;
-      }
-
-      .click-hint {
-        display: none;
-      }
-
-      .carousel-container .slick-dots {
-        bottom: -1rem;
-      }
-      
-      .slick-prev,
-      .slick-next {
-        opacity: 0 !important;
-      }
-      
-      .carousel-container:hover {
-        .slick-prev,
-        .slick-next {
-          opacity: 1 !important;
-        }
-      
-        .slick-prev::after,
-        .slick-next::after {
-          color: var(--primary-color) !important;
-        }
-      }
-      
-      .carousel-container .slick-dots li button {
-        opacity: 0.7 !important;
-      }
-      
-      .carousel-container .slick-dots .slick-active::after {
-        background-color: var(--primary-color) !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .case-card {
-        min-width: 260px;
-        padding: 1rem;
-        height: 50vh;
-      }
-    }
-
-    .cases-carousel {
-      width: 100%;
-      padding: 1rem 1rem;
-    }
-
-    .no-members-message {
-      text-align: center;
-      padding: 1rem;
-      background: #f8f9fa;
-      border-radius: 8px;
-      margin: 1rem 0;
-      color: #666;
-      font-style: italic;
-    }
+  .cases-carousel {
+    width: 100%;
+    padding: 1rem 1rem;
   }
 }
