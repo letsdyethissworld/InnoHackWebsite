@@ -615,6 +615,7 @@ h1:hover {
   .case-card {
     min-width: 260px;
     padding: 1rem;
+    height: 100%;
   }
 
   .tab-content {
