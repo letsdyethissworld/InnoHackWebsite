@@ -4,12 +4,12 @@ import "./RegistrationModal.css";
 const RegistrationModal = ({ cases, onClose }) => {
   const [selectedCase, setSelectedCase] = useState("");
   const [captainName, setCaptainName] = useState("");
-  const [teamMembers, setTeamMembers] = useState([]);
+  const [teamMembers, setTeamMembers] = useState([""]);
   const [teamName, setTeamName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const MAX_TEAM_MEMBERS = 4;
+  const MAX_TEAM_MEMBERS = 3;
 
   const addTeamMember = () => {
     if (teamMembers.length < MAX_TEAM_MEMBERS) {
@@ -18,9 +18,10 @@ const RegistrationModal = ({ cases, onClose }) => {
   };
 
   const removeTeamMember = (index) => {
-    // Удаляем участника без проверки на минимальное количество
-    const newMembers = teamMembers.filter((_, i) => i !== index);
-    setTeamMembers(newMembers);
+    if (teamMembers.length > 1) {
+      const newMembers = teamMembers.filter((_, i) => i !== index);
+      setTeamMembers(newMembers);
+    }
   };
 
   const updateTeamMember = (index, value) => {
@@ -257,16 +258,17 @@ const RegistrationModal = ({ cases, onClose }) => {
                     className="form-input"
                     disabled={isLoading}
                   />
-                  {/* Всегда показываем кнопку удаления */}
-                  <button
-                    type="button"
-                    className="remove-member-btn"
-                    onClick={() => removeTeamMember(index)}
-                    title="Удалить участника"
-                    disabled={isLoading}
-                  >
-                    ✕
-                  </button>
+                  {teamMembers.length > 1 && (
+                    <button
+                      type="button"
+                      className="remove-member-btn"
+                      onClick={() => removeTeamMember(index)}
+                      title="Удалить участника"
+                      disabled={isLoading}
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
