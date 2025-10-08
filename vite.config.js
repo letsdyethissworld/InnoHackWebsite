@@ -1,11 +1,9 @@
 import { defineConfig } from 'vite'
-import path from 'path'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // ... другие настройки
-  resolve: {
-    alias: {
-      antd: path.join(__dirname, 'node_modules/antd/dist/antd.js')
-    }
+  plugins: [react()],
+  optimizeDeps: {
+    include: ['antd'] // Явное включение antd в предварительную обработку
   }
 })
