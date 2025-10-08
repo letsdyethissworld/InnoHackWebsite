@@ -71,6 +71,10 @@
   backdrop-filter: blur(10px);
 }
 
+button {
+  padding: 1em 1em;
+}
+
 .close-btn:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
