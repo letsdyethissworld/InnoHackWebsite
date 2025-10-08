@@ -6,8 +6,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['antd'] // Явное включение antd в предварительную обработку
   },
-  server.allowedHosts: {
+  server: {
     host: '0.0.0.0', // Это заставит сервер разработки слушать только localhost
-    port: 5173,        // Опционально: можно указать конкретный порт, если нужно
+    port: 5173,
+    allowedHosts: ['innohack.up.railway.app'],// Опционально: можно указать конкретный порт, если нужно
   }
 })
