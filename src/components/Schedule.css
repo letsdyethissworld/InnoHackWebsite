@@ -67,6 +67,7 @@
   align-items: flex-start;
 }
 
+/* ФИКС: одинаковый размер для всех временных меток */
 .event-time {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
@@ -74,9 +75,10 @@
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
-  min-width: 80px;
+  min-width: 100px; /* Фиксированная минимальная ширина */
   text-align: center;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .event-content {
@@ -84,8 +86,10 @@
   align-items: flex-start;
   gap: 1rem;
   flex: 1;
+  position: relative;
 }
 
+/* ФИКС: улучшенное позиционирование точек и линий */
 .event-dot {
   width: 12px;
   height: 12px;
@@ -94,21 +98,23 @@
   margin-top: 0.3rem;
   flex-shrink: 0;
   position: relative;
+  z-index: 2;
 }
 
-.event-dot::after {
+/* ФИКС: линия теперь позиционируется относительно всего контейнера */
+.event-content::after {
   content: '';
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 18px; /* Выравниваем по центру точки */
+  left: 5px; /* Выравниваем по центру точки (12px/2 - 1px) */
   width: 2px;
-  height: calc(100% + 1.5rem);
+  height: calc(100% - 12px);
   background: var(--primary-color);
   opacity: 0.3;
+  z-index: 1;
 }
 
-.event-item:last-child .event-dot::after {
+.event-item:last-child .event-content::after {
   display: none;
 }
 
@@ -188,8 +194,20 @@
     gap: 1rem;
   }
 
+  .event-time {
+    min-width: 90px; /* Немного меньше на мобильных */
+    align-self: flex-start;
+  }
+
   .event-content {
     gap: 0.75rem;
+    width: 100%;
+  }
+
+  /* ФИКС: на мобильных линия должна быть короче */
+  .event-content::after {
+    left: 5px;
+    height: calc(100% - 8px);
   }
 
   .event-description {
@@ -209,5 +227,11 @@
 
   .schedule-header h1 {
     font-size: 1.8rem;
+  }
+
+  .event-time {
+    min-width: 85px;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
   }
 }
