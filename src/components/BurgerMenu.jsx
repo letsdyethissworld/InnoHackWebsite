@@ -47,6 +47,13 @@ const BurgerMenu = ({ cases, activeTab, onTabChange }) => {
             Кейс {caseItem.id}: {caseItem.title}
           </button>
         ))}
+
+        <button
+          className={`tab-btn ${activeTab === "schedule" ? "active" : ""}`}
+          onClick={() => onTabChange("schedule")}
+        >
+          📅 Расписание
+        </button>
       </nav>
     </div>
   );
