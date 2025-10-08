@@ -10,7 +10,7 @@ const RegistrationModal = ({ cases, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const MAX_TEAM_MEMBERS = 4;
+  const MAX_TEAM_MEMBERS = 3;
 
   const addTeamMember = () => {
     if (teamMembers.length < MAX_TEAM_MEMBERS) {
