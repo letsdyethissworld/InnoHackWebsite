@@ -163,9 +163,11 @@ const RegistrationModal = ({ cases, onClose }) => {
               >
                 <option value="">-- Выберите кейс для решения --</option>
                 {cases.map((caseItem) => (
-                  <option key={caseItem.id} value={caseItem.id}>
-                    Кейс {caseItem.id}: {caseItem.title}
-                  </option>
+                  {caseItem.id != 1 && (
+                    <option key={caseItem.id} value={caseItem.id}>
+                      Кейс {caseItem.id}: {caseItem.title}
+                    </option>
+                  )}
                 ))}
               </select>
 
