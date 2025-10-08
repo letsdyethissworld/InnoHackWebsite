@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./RegistrationModal.css";
+import ApiService from "../services/api";
 
 const RegistrationModal = ({ cases, onClose }) => {
   const [selectedCase, setSelectedCase] = useState("");
@@ -29,25 +30,10 @@ const RegistrationModal = ({ cases, onClose }) => {
     setTeamMembers(newMembers);
   };
 
-  // РЕАЛЬНЫЙ HTTP ЗАПРОС
+  // HTTP request using API service
   const submitRegistration = async (registrationData) => {
-    // Используйте localhost для разработки
-    const API_URL = "https://innohackwebsite-production.up.railway.app/api/registrations";
-
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(registrationData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await ApiService.submitRegistration(registrationData);
       return { success: true, data: result };
     } catch (error) {
       console.error("Ошибка при отправке данных:", error);
