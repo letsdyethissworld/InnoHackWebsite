@@ -13,7 +13,7 @@ const RegistrationModal = ({ cases, onClose }) => {
   const MAX_TEAM_MEMBERS = 3;
 
   // Фильтруем кейсы - убираем кейс с id 5 (регистрация закрыта)
-  const availableCases = cases.filter(caseItem => caseItem.id !== 5);
+  const availableCases = cases.filter(caseItem => caseItem.id !== 1);
 
   const addTeamMember = () => {
     if (teamMembers.length < MAX_TEAM_MEMBERS) {
@@ -235,11 +235,6 @@ const RegistrationModal = ({ cases, onClose }) => {
                   </p>
                 </div>
               )}
-
-              {/* Сообщение о закрытой регистрации на кейс 5 */}
-              <div className="registration-closed-notice">
-                <p>ℹ️ <strong>Регистрация на Кейс 5 временно закрыта</strong></p>
-              </div>
             </div>
           </div>
 
