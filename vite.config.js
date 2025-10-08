@@ -6,7 +6,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // Явно указываем, что antd не является внешней зависимостью
-      external: []
+      external: ['antd']
     }
   }
 })
