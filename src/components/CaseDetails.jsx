@@ -8,7 +8,7 @@ const CaseDetails = ({ caseItem }) => {
 
   return (
     <div className="case-details">
-      {caseItem.id === 1 && (
+      {caseItem.id === 1 && caseItem.is === 5 &&(
         <div className="registration-closed-banner">
           <div className="banner-content">
             <span className="banner-icon">🚫</span>
