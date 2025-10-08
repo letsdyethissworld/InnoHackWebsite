@@ -185,6 +185,6 @@ export const cases = [
     technologies: ["Python/Flask/Django", "React/Vue.js", "PostgreSQL/MySQL", "HTML5/CSS3", "JavaScript"],
     
     timeEstimate: "4-5 недель",
-    teamSize: "4-5 человек"
+    teamSize: "3-4 человек"
   }
 ];
