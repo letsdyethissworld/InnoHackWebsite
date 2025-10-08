@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
-  plugins: [react()],
-  build: {
-    rollupOptions: {
-      // Явно указываем, что antd не является внешней зависимостью
-      external: ['antd']
+  // ... другие настройки
+  resolve: {
+    alias: {
+      antd: path.join(__dirname, 'node_modules/antd/dist/antd.js')
     }
   }
 })
