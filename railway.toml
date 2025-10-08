@@ -1,6 +1,0 @@
-[build]
-builder = "nixpacks"
-buildCommand = "curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs && npm install && npm run build"
-
-[deploy]
-startCommand = "npx serve -s dist -l 3000"
