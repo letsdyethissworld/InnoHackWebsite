@@ -13,6 +13,8 @@ RUN npm install
 # Копируем исходный код проекта (включая vite.config.js)
 COPY . .
 
+RUN npm install antd
+
 # Собираем приложение
 RUN npm run build
 
