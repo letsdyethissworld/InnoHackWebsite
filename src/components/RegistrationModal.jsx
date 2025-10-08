@@ -4,18 +4,20 @@ import "./RegistrationModal.css";
 const RegistrationModal = ({ cases, onClose }) => {
   const [selectedCase, setSelectedCase] = useState("");
   const [captainName, setCaptainName] = useState("");
-  const [teamMembers, setTeamMembers] = useState([""]); // Начинаем с одного участника
+  const [teamMembers, setTeamMembers] = useState([""]);
   const [teamName, setTeamName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const MAX_TEAM_MEMBERS = 3;
+  const MAX_TEAM_MEMBERS = 4;
+
+  // Фильтруем кейсы - убираем кейс с id 5 (регистрация закрыта)
+  const availableCases = cases.filter(caseItem => caseItem.id !== 5);
 
   const addTeamMember = () => {
     if (teamMembers.length < MAX_TEAM_MEMBERS) {
       setTeamMembers([...teamMembers, ""]);
-      // Убираем ошибку участников при добавлении нового поля
       if (errors.teamMembers) {
         setErrors(prev => ({ ...prev, teamMembers: "" }));
       }
@@ -26,7 +28,6 @@ const RegistrationModal = ({ cases, onClose }) => {
     const newMembers = teamMembers.filter((_, i) => i !== index);
     setTeamMembers(newMembers);
     
-    // Проверяем остались ли участники после удаления
     if (newMembers.length === 0) {
       setErrors(prev => ({ ...prev, teamMembers: "Добавьте хотя бы одного участника" }));
     } else {
@@ -39,7 +40,6 @@ const RegistrationModal = ({ cases, onClose }) => {
     newMembers[index] = value;
     setTeamMembers(newMembers);
     
-    // Проверяем есть ли хотя бы один заполненный участник
     const hasValidMember = newMembers.some(member => member.trim() !== "");
     if (hasValidMember && errors.teamMembers) {
       setErrors(prev => ({ ...prev, teamMembers: "" }));
@@ -67,7 +67,6 @@ const RegistrationModal = ({ cases, onClose }) => {
       newErrors.email = "Введите корректный email";
     }
     
-    // Проверяем, что есть хотя бы один участник (не считая капитана)
     const hasValidMember = teamMembers.some(member => member.trim() !== "");
     if (!hasValidMember) {
       newErrors.teamMembers = "Добавьте хотя бы одного участника помимо капитана";
@@ -107,9 +106,7 @@ const RegistrationModal = ({ cases, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Валидация формы
     if (!validateForm()) {
-      // Прокручиваем к первой ошибке
       const firstErrorElement = document.querySelector('.error-message');
       if (firstErrorElement) {
         firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -136,7 +133,6 @@ const RegistrationModal = ({ cases, onClose }) => {
       if (result.success) {
         alert("✅ Регистрация успешно отправлена! Мы свяжемся с вами в ближайшее время.");
 
-        // Очищаем форму после успешной отправки
         setTeamName("");
         setSelectedCase("");
         setCaptainName("");
@@ -156,11 +152,10 @@ const RegistrationModal = ({ cases, onClose }) => {
     }
   };
 
-  const selectedCaseData = cases.find(
+  const selectedCaseData = availableCases.find(
     (caseItem) => caseItem.id === selectedCase
   );
 
-  // Проверяем, можно ли отправить форму (все обязательные поля заполнены + есть участники)
   const canSubmit = teamName.trim() && 
                    selectedCase && 
                    captainName.trim() && 
@@ -173,7 +168,7 @@ const RegistrationModal = ({ cases, onClose }) => {
         <div className="modal-header">
           <h2>🎯 Регистрация на хакатон</h2>
           <button className="close-btn" onClick={onClose}>
-            ✕
+            ×
           </button>
         </div>
 
@@ -220,12 +215,10 @@ const RegistrationModal = ({ cases, onClose }) => {
                 disabled={isLoading}
               >
                 <option value="">-- Выберите кейс для решения --</option>
-                {cases.map((caseItem) => (
-                  {caseItem.id != 1 && (
-                    <option key={caseItem.id} value={caseItem.id}>
-                      Кейс {caseItem.id}: {caseItem.title}
-                    </option>
-                  )}
+                {availableCases.map((caseItem) => (
+                  <option key={caseItem.id} value={caseItem.id}>
+                    Кейс {caseItem.id}: {caseItem.title}
+                  </option>
                 ))}
               </select>
               {errors.selectedCase && <span className="error-message">{errors.selectedCase}</span>}
@@ -242,6 +235,11 @@ const RegistrationModal = ({ cases, onClose }) => {
                   </p>
                 </div>
               )}
+
+              {/* Сообщение о закрытой регистрации на кейс 5 */}
+              <div className="registration-closed-notice">
+                <p>ℹ️ <strong>Регистрация на Кейс 5 временно закрыта</strong></p>
+              </div>
             </div>
           </div>
 
