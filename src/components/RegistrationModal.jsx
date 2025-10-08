@@ -13,7 +13,7 @@ const RegistrationModal = ({ cases, onClose }) => {
   const MAX_TEAM_MEMBERS = 3;
 
   // Фильтруем кейсы - убираем кейс с id 5 (регистрация закрыта)
-  const availableCases = cases.filter(caseItem => caseItem.id !== 1);
+  const availableCases = cases.filter(caseItem => caseItem.id !== 1 && caseItem.id !== 5);
 
   const addTeamMember = () => {
     if (teamMembers.length < MAX_TEAM_MEMBERS) {
