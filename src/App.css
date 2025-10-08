@@ -680,3 +680,40 @@ h1:hover {
     padding: 1rem 1rem;
   }
 }
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0.5rem 1.5rem;
+    padding-top: 1.5rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.3rem, 5vw, 2rem);
+    padding: 0.5rem 0.8rem;
+    line-height: 1.3;
+  }
+  
+  .app-header p {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.5rem 1rem;
+    padding-top: 1.2rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+    padding: 0.4rem 0.6rem;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  
+  .app-header p {
+    font-size: clamp(1rem, 3vw, 1.1rem);
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+}
