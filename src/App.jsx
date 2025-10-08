@@ -61,7 +61,7 @@ function App() {
 
       <header className="app-header">
         <div className="logo" onClick={handleLogoClick}>
-          <h1 classNmae="main-logo">Кейсы InnoHackathon</h1>
+          <h1 classNmae="main-logo">Кейсы InnoHackathoфцвфлдцрвфжn</h1>
         </div>
         <p>
           Изучите предложенные кейсы и выберите наиболее интересный для
