@@ -4,23 +4,33 @@ import "./RegistrationModal.css";
 const RegistrationModal = ({ cases, onClose }) => {
   const [selectedCase, setSelectedCase] = useState("");
   const [captainName, setCaptainName] = useState("");
-  const [teamMembers, setTeamMembers] = useState([""]);
+  const [teamMembers, setTeamMembers] = useState([""]); // Начинаем с одного участника
   const [teamName, setTeamName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const MAX_TEAM_MEMBERS = 3;
+  const MAX_TEAM_MEMBERS = 4;
 
   const addTeamMember = () => {
     if (teamMembers.length < MAX_TEAM_MEMBERS) {
       setTeamMembers([...teamMembers, ""]);
+      // Убираем ошибку участников при добавлении нового поля
+      if (errors.teamMembers) {
+        setErrors(prev => ({ ...prev, teamMembers: "" }));
+      }
     }
   };
 
   const removeTeamMember = (index) => {
-    if (teamMembers.length > 1) {
-      const newMembers = teamMembers.filter((_, i) => i !== index);
-      setTeamMembers(newMembers);
+    const newMembers = teamMembers.filter((_, i) => i !== index);
+    setTeamMembers(newMembers);
+    
+    // Проверяем остались ли участники после удаления
+    if (newMembers.length === 0) {
+      setErrors(prev => ({ ...prev, teamMembers: "Добавьте хотя бы одного участника" }));
+    } else {
+      setErrors(prev => ({ ...prev, teamMembers: "" }));
     }
   };
 
@@ -28,50 +38,85 @@ const RegistrationModal = ({ cases, onClose }) => {
     const newMembers = [...teamMembers];
     newMembers[index] = value;
     setTeamMembers(newMembers);
+    
+    // Проверяем есть ли хотя бы один заполненный участник
+    const hasValidMember = newMembers.some(member => member.trim() !== "");
+    if (hasValidMember && errors.teamMembers) {
+      setErrors(prev => ({ ...prev, teamMembers: "" }));
+    }
   };
 
-  // РЕАЛЬНЫЙ HTTP ЗАПРОС
-  const submitRegistration = async (registrationData) => {
-  const API_URL = "https://innohackwebsite-production.up.railway.app/api/registrations";
-
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: 'cors', // явно указываем режим CORS
-      body: JSON.stringify(registrationData),
-    });
-
-    if (!response.ok) {
-      // Более детальная информация об ошибке
-      const errorText = await response.text();
-      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
-    }
-
-    const result = await response.json();
-    return { success: true, data: result };
-  } catch (error) {
-    console.error("Ошибка при отправке данных:", error);
+  const validateForm = () => {
+    const newErrors = {};
     
-    // Проверяем, является ли ошибка CORS
-    if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
+    if (!teamName.trim()) {
+      newErrors.teamName = "Введите название команды";
+    }
+    
+    if (!selectedCase) {
+      newErrors.selectedCase = "Выберите кейс";
+    }
+    
+    if (!captainName.trim()) {
+      newErrors.captainName = "Введите имя капитана";
+    }
+    
+    if (!email.trim()) {
+      newErrors.email = "Введите email";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = "Введите корректный email";
+    }
+    
+    // Проверяем, что есть хотя бы один участник (не считая капитана)
+    const hasValidMember = teamMembers.some(member => member.trim() !== "");
+    if (!hasValidMember) {
+      newErrors.teamMembers = "Добавьте хотя бы одного участника помимо капитана";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const submitRegistration = async (registrationData) => {
+    const API_URL = "https://innohackwebsite-production.up.railway.app/api/registrations";
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registrationData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return { success: true, data: result };
+    } catch (error) {
+      console.error("Ошибка при отправке данных:", error);
       return {
         success: false,
-        error: "CORS ошибка: Бэкенд не разрешает запросы с этого домена. Нужно настроить CORS на сервере."
+        error: error.message || "Не удалось подключиться к серверу",
       };
     }
-    
-    return {
-      success: false,
-      error: error.message || "Не удалось подключиться к серверу"
-    };
-  }
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Валидация формы
+    if (!validateForm()) {
+      // Прокручиваем к первой ошибке
+      const firstErrorElement = document.querySelector('.error-message');
+      if (firstErrorElement) {
+        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+    
     setIsLoading(true);
 
     const registrationData = {
@@ -81,19 +126,15 @@ const RegistrationModal = ({ cases, onClose }) => {
       captainEmail: email.trim(),
       teamMembers: teamMembers.filter((member) => member.trim() !== ""),
       registrationDate: new Date().toISOString(),
-      // Дополнительные поля которые могут понадобиться
       event: "Лицейский Хакатон 2024",
       status: "pending",
     };
 
     try {
-      // Отправляем реальный HTTP запрос
       const result = await submitRegistration(registrationData);
 
       if (result.success) {
-        alert(
-          "✅ Регистрация успешно отправлена! Мы свяжемся с вами в ближайшее время."
-        );
+        alert("✅ Регистрация успешно отправлена! Мы свяжемся с вами в ближайшее время.");
 
         // Очищаем форму после успешной отправки
         setTeamName("");
@@ -101,6 +142,7 @@ const RegistrationModal = ({ cases, onClose }) => {
         setCaptainName("");
         setEmail("");
         setTeamMembers([""]);
+        setErrors({});
 
         onClose();
       } else {
@@ -114,22 +156,16 @@ const RegistrationModal = ({ cases, onClose }) => {
     }
   };
 
-  // Альтернативный вариант с axios (если предпочитаете)
-  /*
-  const submitRegistrationWithAxios = async (registrationData) => {
-    try {
-      const response = await axios.post('https://your-backend-api.com/api/registrations', registrationData);
-      return { success: true, data: response.data };
-    } catch (error) {
-      console.error('Ошибка при отправке данных:', error);
-      return { success: false, error: error.message };
-    }
-  };
-  */
-
   const selectedCaseData = cases.find(
     (caseItem) => caseItem.id === selectedCase
   );
+
+  // Проверяем, можно ли отправить форму (все обязательные поля заполнены + есть участники)
+  const canSubmit = teamName.trim() && 
+                   selectedCase && 
+                   captainName.trim() && 
+                   email.trim() && 
+                   teamMembers.some(member => member.trim() !== "");
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -152,12 +188,18 @@ const RegistrationModal = ({ cases, onClose }) => {
                 type="text"
                 id="teamName"
                 value={teamName}
-                onChange={(e) => setTeamName(e.target.value)}
+                onChange={(e) => {
+                  setTeamName(e.target.value);
+                  if (errors.teamName) {
+                    setErrors(prev => ({ ...prev, teamName: "" }));
+                  }
+                }}
                 required
                 placeholder="Придумайте креативное название"
-                className="form-input"
+                className={`form-input ${errors.teamName ? 'error' : ''}`}
                 disabled={isLoading}
               />
+              {errors.teamName && <span className="error-message">{errors.teamName}</span>}
             </div>
 
             <div className="form-group">
@@ -167,9 +209,14 @@ const RegistrationModal = ({ cases, onClose }) => {
               <select
                 id="caseSelect"
                 value={selectedCase}
-                onChange={(e) => setSelectedCase(e.target.value)}
+                onChange={(e) => {
+                  setSelectedCase(e.target.value);
+                  if (errors.selectedCase) {
+                    setErrors(prev => ({ ...prev, selectedCase: "" }));
+                  }
+                }}
                 required
-                className="form-select"
+                className={`form-select ${errors.selectedCase ? 'error' : ''}`}
                 disabled={isLoading}
               >
                 <option value="">-- Выберите кейс для решения --</option>
@@ -179,15 +226,11 @@ const RegistrationModal = ({ cases, onClose }) => {
                   </option>
                 ))}
               </select>
+              {errors.selectedCase && <span className="error-message">{errors.selectedCase}</span>}
 
               {selectedCaseData && (
                 <div className="case-preview">
                   <div className="case-preview-header">
-                    <span
-                      className={`case-difficulty ${selectedCaseData.difficulty.toLowerCase()}`}
-                    >
-                      {selectedCaseData.difficulty}
-                    </span>
                     <span className="case-category">
                       {selectedCaseData.category}
                     </span>
@@ -211,12 +254,18 @@ const RegistrationModal = ({ cases, onClose }) => {
                   type="text"
                   id="captainName"
                   value={captainName}
-                  onChange={(e) => setCaptainName(e.target.value)}
+                  onChange={(e) => {
+                    setCaptainName(e.target.value);
+                    if (errors.captainName) {
+                      setErrors(prev => ({ ...prev, captainName: "" }));
+                    }
+                  }}
                   required
                   placeholder="Ваше полное имя"
-                  className="form-input"
+                  className={`form-input ${errors.captainName ? 'error' : ''}`}
                   disabled={isLoading}
                 />
+                {errors.captainName && <span className="error-message">{errors.captainName}</span>}
               </div>
 
               <div className="form-group">
@@ -227,12 +276,18 @@ const RegistrationModal = ({ cases, onClose }) => {
                   type="email"
                   id="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errors.email) {
+                      setErrors(prev => ({ ...prev, email: "" }));
+                    }
+                  }}
                   required
                   placeholder="example@email.com"
-                  className="form-input"
+                  className={`form-input ${errors.email ? 'error' : ''}`}
                   disabled={isLoading}
                 />
+                {errors.email && <span className="error-message">{errors.email}</span>}
               </div>
             </div>
           </div>
@@ -245,6 +300,12 @@ const RegistrationModal = ({ cases, onClose }) => {
                 {MAX_TEAM_MEMBERS}
               </span>
             </div>
+
+            {errors.teamMembers && (
+              <div className="error-message team-members-error">
+                {errors.teamMembers}
+              </div>
+            )}
 
             <div className="team-members">
               {teamMembers.map((member, index) => (
@@ -275,7 +336,10 @@ const RegistrationModal = ({ cases, onClose }) => {
 
             {teamMembers.length === 0 && (
               <div className="no-members-message">
-                <p>Участники не добавлены. Нажмите «Добавить участника», чтобы включить кого-то в команду.</p>
+                <p>
+                  Участники не добавлены. Нажмите «Добавить участника», чтобы
+                  включить кого-то в команду.
+                </p>
               </div>
             )}
 
@@ -292,8 +356,7 @@ const RegistrationModal = ({ cases, onClose }) => {
             )}
 
             <div className="members-note">
-              * Максимальное количество участников (помимо капитана):{" "}
-              {MAX_TEAM_MEMBERS}
+              * Обязательно добавьте хотя бы одного участника помимо капитана
             </div>
           </div>
 
@@ -306,7 +369,11 @@ const RegistrationModal = ({ cases, onClose }) => {
             >
               Отмена
             </button>
-            <button type="submit" className="submit-btn" disabled={isLoading}>
+            <button 
+              type="submit" 
+              className="submit-btn" 
+              disabled={isLoading || !canSubmit}
+            >
               {isLoading ? (
                 <>
                   <div className="loading-spinner"></div>
