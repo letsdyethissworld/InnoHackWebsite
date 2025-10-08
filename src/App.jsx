@@ -69,13 +69,23 @@ function App() {
       </header>
 
       <main className="cases-container">
-        {/* Вкладки */}
-        <BurgerMenu
-          cases={cases}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-        />
-        {/* Контент вкладок */}
+        <div className="mobile-navigation">
+          <BurgerMenu 
+            cases={cases}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+        </div>
+
+        {/* Десктопные вкладки (только на компьютере) */}
+        <div className="desktop-navigation">
+          <DesktopTabs 
+            cases={cases}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+        </div>
+        
         <div className="tab-content">
           {activeTab === "all" ? (
             <div className="all-cases">
