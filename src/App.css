@@ -765,13 +765,13 @@ body {
       .case-card {
         min-width: 260px;
         padding: 1rem;
+        height: 70vh;
       }
     }
 
     .cases-carousel {
       width: 100%;
       padding: 1rem 1rem;
-      height: 70vh;
     }
 
     .no-members-message {
