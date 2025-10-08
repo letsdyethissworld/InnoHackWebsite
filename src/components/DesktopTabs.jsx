@@ -16,7 +16,7 @@ const DesktopTabs = ({ cases, activeTab, onTabChange }) => {
           className={`tab-btn ${activeTab === "schedule" ? "active" : ""}`}
           onClick={() => onTabChange("schedule")}
         >
-          📅 Расписание
+          Расписание
         </button>
         
         {cases.map((caseItem) => (
