@@ -717,3 +717,91 @@ body {
     margin-bottom: 1.5rem;
   }
 }
+
+/* Баннер закрытой регистрации */
+.registration-closed-banner {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(255, 107, 107, 0.5);
+  }
+  100% {
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  }
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.banner-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.banner-text h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.banner-text p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* Адаптивность для баннера */
+@media (max-width: 768px) {
+  .registration-closed-banner {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .banner-content {
+    gap: 0.75rem;
+  }
+  
+  .banner-icon {
+    font-size: 1.75rem;
+  }
+  
+  .banner-text h3 {
+    font-size: 1.2rem;
+  }
+  
+  .banner-text p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-closed-banner {
+    padding: 1rem;
+  }
+  
+  .banner-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .banner-text h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+}
