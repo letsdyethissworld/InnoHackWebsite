@@ -48,8 +48,8 @@ body {
 /* Кнопка регистрации в правом верхнем углу */
 .registration-btn {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 0.5rem;
+  right: 0.5rem;
   background: rgba(255, 255, 255, 0.95);
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
