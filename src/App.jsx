@@ -4,6 +4,7 @@ import CaseDetails from "./components/CaseDetails";
 import RegistrationModal from "./components/RegistrationModal";
 import BurgerMenu from "./components/BurgerMenu";
 import DesktopTabs from "./components/DesktopTabs";
+import Schedule from "./components/Schedule";
 import { Carousel } from "antd";
 import { cases } from "./data/cases";
 import "./App.css";
@@ -91,6 +92,8 @@ function App() {
                 </Carousel>
               </div>
             </div>
+          ) : activeTab === "schedule" ? (
+            <Schedule />
           ) : (
             <CaseDetails
               caseItem={cases.find((caseItem) => caseItem.id === activeTab)}
