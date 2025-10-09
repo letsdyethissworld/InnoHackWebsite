@@ -6,7 +6,7 @@ const CaseDetails = ({ caseItem }) => {
     return <div className="case-details">Кейс не найден</div>;
   }
 
-const isRegistrationClosed = caseItem.id === 1 || caseItem.id === 5;
+const isRegistrationClosed = caseItem.id === 1 || caseItem.id === 5 || caseItem.id === 2;
   
   return (
     <div className="case-details">
