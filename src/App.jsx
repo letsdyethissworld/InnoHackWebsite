@@ -37,12 +37,7 @@ function App() {
   return (
     <div className="App">
       {/* Кнопка регистрации в правом верхнем углу */}
-      <button
-        className="registration-btn"
-        onClick={() => setShowRegistration(true)}
-      >
-        📝 Зарегистрироваться
-      </button>
+      
 
       <header className="app-header">
         <div className="logo" onClick={handleLogoClick}>
@@ -105,15 +100,6 @@ function App() {
       <footer className="app-footer">
         <p>Лицейский Хакатон 2025 • Разработано с ❤️ для участников</p>
       </footer>
-
-      {/* Модальное окно регистрации */}
-      {showRegistration && (
-        <RegistrationModal
-          cases={cases}
-          onClose={() => setShowRegistration(false)}
-        />
-      )}
-    </div>
   );
 }
 
