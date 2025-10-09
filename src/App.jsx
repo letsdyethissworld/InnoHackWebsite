@@ -100,6 +100,7 @@ function App() {
       <footer className="app-footer">
         <p>Лицейский Хакатон 2025 • Разработано с ❤️ для участников</p>
       </footer>
+  </div>
   );
 }
 
