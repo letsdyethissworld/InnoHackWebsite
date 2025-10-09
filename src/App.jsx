@@ -35,13 +35,7 @@ function App() {
   return (
     <div className="App">
       {/* Кнопка регистрации в правом верхнем углу */}
-      <button
-        className="registration-btn"
-        onClick={() => setShowRegistration(true)}
-      >
-        📝 Зарегистрироваться
-      </button>
-
+      
       <header className="app-header">
         <div className="logo" onClick={handleLogoClick}>
           <h1>Кейсы InnoHackathon</h1>
@@ -93,12 +87,7 @@ function App() {
       </footer>
 
       {/* Модальное окно регистрации */}
-      {showRegistration && (
-        <RegistrationModal
-          cases={cases}
-          onClose={() => setShowRegistration(false)}
-        />
-      )}
+      
     </div>
   );
 }
