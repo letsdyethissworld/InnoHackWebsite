@@ -245,7 +245,7 @@ const RegistrationModal = ({ cases, onClose }) => {
                     type="text"
                     value={member}
                     onChange={(e) => updateTeamMember(index, e.target.value)}
-                    placeholder={`Имя участника ${index + 1}`}
+                    placeholder={`ФИО участника ${index + 1}`}
                     className="form-input"
                     disabled={isLoading}
                   />
