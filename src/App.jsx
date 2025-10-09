@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import CaseCard from "./components/CaseCard";
 import CaseDetails from "./components/CaseDetails";
-import RegistrationModal from "./components/RegistrationModal";
 import BurgerMenu from "./components/BurgerMenu";
 import DesktopTabs from "./components/DesktopTabs";
-import Schedule from "./components/Schedule";
 import { Carousel } from "antd";
 import { cases } from "./data/cases";
 import "./App.css";
 
 function App() {
   const [activeTab, setActiveTab] = useState("all");
-  const [showRegistration, setShowRegistration] = useState(false);
+  
+  // Регистрация закрыта - убираем состояние для модального окна
 
-  // Функция для перехода к конкретному кейсу
   const handleCaseClick = (caseId) => {
     setActiveTab(caseId);
   };
@@ -24,24 +22,48 @@ function App() {
 
   const carouselSettings = {
     dots: true,
-    infinite: true, // было "infinte"
+    infinite: true,
     autoplay: true,
-    arrows: true, // было "arrow"
+    arrows: true,
     autoplaySpeed: 6000,
     speed: 1000,
     slidesToShow: 1,
-    draggable: false, // было "darggable"
-    slidesToScroll: 1
+    draggable: false,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
     <div className="App">
-      {/* Кнопка регистрации в правом верхнем углу */}
-      
+      {/* Убираем кнопку регистрации и добавляем сообщение о закрытии */}
+      <div className="registration-closed-header">
+        <div className="closed-message">
+          <span className="closed-icon">🚫</span>
+          <div className="closed-text">
+            <strong>Регистрация закрыта</strong>
+            <span>Набор команд на хакатон завершен</span>
+          </div>
+        </div>
+      </div>
 
       <header className="app-header">
         <div className="logo" onClick={handleLogoClick}>
-          <h1 classNmae="main-logo">Кейсы InnoHackathon</h1>
+          <h1>Кейсы InnoHackathon</h1>
         </div>
         <p>
           Изучите предложенные кейсы и выберите наиболее интересный для
@@ -50,23 +72,19 @@ function App() {
       </header>
 
       <main className="cases-container">
-        <div className="mobile-navigation">
-          <BurgerMenu 
-            cases={cases}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
-        </div>
-
-        {/* Десктопные вкладки (только на компьютере) */}
-        <div className="desktop-navigation">
-          <DesktopTabs 
-            cases={cases}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
-        </div>
+        {/* Вкладки */}
+        <DesktopTabs
+          cases={cases}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+        <BurgerMenu
+          cases={cases}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
         
+        {/* Контент вкладок */}
         <div className="tab-content">
           {activeTab === "all" ? (
             <div className="all-cases">
@@ -100,7 +118,7 @@ function App() {
       <footer className="app-footer">
         <p>Лицейский Хакатон 2025 • Разработано с ❤️ для участников</p>
       </footer>
-  </div>
+    </div>
   );
 }
 
