@@ -9,8 +9,6 @@ import "./App.css";
 
 function App() {
   const [activeTab, setActiveTab] = useState("all");
-  
-  // Регистрация закрыта - убираем состояние для модального окнаа
 
   const handleCaseClick = (caseId) => {
     setActiveTab(caseId);
